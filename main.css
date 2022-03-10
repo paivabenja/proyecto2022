@@ -1,0 +1,39 @@
+body {
+    background-color: #363636;
+    color: white;
+}
+
+a {
+    padding: 5px;
+    text-decoration: none;
+    transition: 500ms;
+    transition-delay: 10ms;
+    margin: 5px;
+}
+
+a:hover {
+    background-color: #bbb;
+    transform: scale(110%);
+}
+
+.banner{
+    width: 100%;
+    background-color: #999;
+    margin: 0px;
+    top: 0px;
+    position: fixed;
+    display: inline-flex;
+    
+}
+
+#search{
+    width: 100%;
+    height: 15px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.cm{
+    float: right;
+    min-width: 80px;
+}
