@@ -1,0 +1,41 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0; overflow: hidden; width: 59vw; height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+button{
+    background-color: rgb(50, 50, 50); border: none; color: white; cursor: pointer;
+}
+
+nav{
+    background-color: rgb(50, 50, 50); color: white; display: flex; padding: .5rem; width: 100%;
+    height: 4vh; position: relative; justify-content: space-between;
+} 
+nav h1{
+    margin: 0; font-size: 1.4em;
+}
+
+.btns{
+    display: inline-flex;
+}
+
+.btn-buscar:active , .hamburger:active{
+    background-color: rgb(80, 80, 80);
+}
+
+.barra-buscar{
+    position: absolute; top: 0; z-index: -1; width: 59vw;
+    background-color: rgb(50, 50, 50); color: white; display: inline-flex; padding: .5rem;
+    height: 2.5vh; transition: ease 1.5s;
+}
+.barra-buscar input{
+    max-height: 2vh; border-radius: 5vh; border: none; width: 59vw;
+}
+
+.menu-desplegable{
+    position: absolute; top: 0; right: 37vw; height: 100%; width: 20vw; background-color: rgb(50, 50, 50);
+    padding-top: 7vh; justify-content: space-around; text-align: center; z-index: -1;
+}
