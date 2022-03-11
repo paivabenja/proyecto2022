@@ -37,3 +37,13 @@ a:hover {
     float: right;
     min-width: 80px;
 }
+
+.sidebar span {
+    display: block;
+}
+
+.sidebar {
+    background-color: #444;
+    margin-top: 40px;
+    max-width: 15%;
+}
