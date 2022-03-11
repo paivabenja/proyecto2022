@@ -1,0 +1,41 @@
+body {
+    background-color: #363636;
+    color: white;
+    font-family: sans-serif;
+}
+
+.item {
+    align-items: center;
+    background-color: #444;
+    padding: 20px;
+    width: 16.5vw;
+    display: inline-block;
+}
+
+.content {
+    align-items: center;
+    width: 100%;
+}
+
+.miniatura {
+    display: block;
+}
+
+.titulo{
+    display: block;
+    margin-left: 13px;
+    font-size: 25px;
+}
+
+.info{
+    display: block;
+    font-size: 3;
+    font-weight: bold;
+    color: #888;
+    margin-left: 13px;
+}
+
+img {
+    padding-left: 13px;
+    padding-bottom: 10px;
+}
