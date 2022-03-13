@@ -15,7 +15,8 @@ body {
 .content {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    align-items: center;
+    grid-template-rows: 1;
+    /*align-items: center;*/
     width: 100%;
 }
 
