@@ -1,25 +1,24 @@
-from flask import Flask, render_template, session, request
-import jyserver
-import flask_sqlalchemy import SQLAlchemy
+from flask import Flask, session, request
+from flask_sqlalchemy import SQLAlchemy
+from datetime import timedelta
+from login import lg
+from users import database
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.permanent_session_lifetime = timedelta(minutes=15)
+app.register_blueprint(lg, url_prefix='login')
+app.register_blueprint(database, url_prefix='db')
 app.secret_key = 'keloke'
-
-db = SQLAlchemy(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home')
 def inicio():
-    return render_template('index.html')
-
-@app.route('/signup', methods['GET', 'POST'])
-def signup():
-    return render_template('signup.html')
-
-
+    if 'usuario' in session:
+        usuario = session['usuario']
+    else:
+        usuario = 'no logueado'
+    return {'usuario': usuario}
 
 
 if __name__ == '__main__':

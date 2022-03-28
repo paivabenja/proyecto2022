@@ -1,6 +1,12 @@
-from flask import Flask, render_template, session, request
-import flask_sqlalchemy import SQLAlchemy
-from app import db
+from flask import Flask, render_template, session, request, Blueprint, current_app
+from flask_sqlalchemy import SQLAlchemy
+
+database = Blueprint('database', __name__)
+
+current_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/users.db'
+current_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(database)
 
 class users(db.Model):
     _id = db.Column('id', db.Integer, primary_key=True)
@@ -12,3 +18,6 @@ class users(db.Model):
         self.nombre = nombre
         self.email = email
         self.contraseña = contraseña
+    
+    def __str__(self):
+        return f'{self.id} {self.nombre} {self.mail} {self.contraseña}'
