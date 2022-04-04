@@ -1,11 +1,13 @@
 import React from "react";
 import NavbarComp from "./components/NavbarComp";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import itemComp from "./components/ItemComp";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div>
-      <NavbarComp/>
+      <NavbarComp />
+      <ItemComp />
     </div>
   );
 }
