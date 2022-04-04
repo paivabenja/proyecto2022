@@ -1,14 +1,7 @@
-from flask import Flask, render_template, session, request, Blueprint, current_app
-from flask_sqlalchemy import SQLAlchemy
+from app import db
+from flask_login import login_user, login_required, logout_user, current_user
 
-database = Blueprint('database', __name__)
-
-current_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database/users.db'
-current_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(database)
-
-class users(db.Model):
+class User(db.Model):
     _id = db.Column('id', db.Integer, primary_key=True)
     nombre = db.Column(db.String(30))
     email = db.Column(db.String(100))
@@ -21,3 +14,10 @@ class users(db.Model):
     
     def __str__(self):
         return f'{self.id} {self.nombre} {self.mail} {self.contraseña}'
+
+def new_user(nombre, email, contraseña):
+    user = User(nombre=nombre, email=email, contraseña=contraseña)
+    db.session.add(user)
+    db.session.commit()
+    login_user(user, remember=True)
+    return user
