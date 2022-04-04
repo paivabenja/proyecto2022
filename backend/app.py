@@ -1,16 +1,37 @@
 from flask import Flask, session, request
 from flask_sqlalchemy import SQLAlchemy
-from datetime import timedelta
-from login import lg
-from users import database
+from flask_login import LoginManager
+from os import path
 
-app = Flask(__name__)
-app.permanent_session_lifetime = timedelta(minutes=15)
-app.register_blueprint(lg, url_prefix='login')
-app.register_blueprint(database, url_prefix='db')
-app.secret_key = 'keloke'
+db = SQLAlchemy()
+DB_NAME = 'users.db'
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///database/{DB_NAME}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.secret_key = 'keloke'
+    db.init_app(app)
+
+    from login import login
+    from paginas import paginas
+
+    app.register_blueprint(login, url_prefix='/')
+    app.register_blueprint(paginas, url_prefix='/')
+
+    create_database(app)
+
+    return app
 
 
+
+def create_database(app):
+    if not path.exists('backend/' + DB_NAME):
+        db.create_all(app=app)
+        print('Base de datos creada')
+
+
+'''
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home')
 def inicio():
@@ -22,4 +43,4 @@ def inicio():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)'''
