@@ -8,7 +8,7 @@ DB_NAME = 'users.db'
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///database/{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///../{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = 'keloke'
     db.init_app(app)
@@ -29,7 +29,6 @@ def create_database(app):
     if not path.exists('backend/' + DB_NAME):
         db.create_all(app=app)
         print('Base de datos creada')
-
 
 '''
 @app.route('/', methods=['GET', 'POST'])
