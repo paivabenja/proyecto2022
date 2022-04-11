@@ -1,47 +1,55 @@
-from flask import Flask, session, request, redirect, url_for, Blueprint
+from flask import Flask, request, redirect, url_for, Blueprint, render_template, flash
 from flask_login import login_user, login_required, logout_user, current_user
-from users import new_user
+from users import User, new_user
 from app import db
 
 login = Blueprint('login', __name__)
 
 @login.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if 'user' in session:
-        return redirect(url_for('/'))
-    elif request.method == 'POST':
-        session.permanent = True
-        usuario = request.form['usuario']
-        mail = request.form['mail']
-        contraseña = request.form['contraseña']
-        session['usuario'] = usuario
+    if request.method == 'POST':
+        usuario = request.form.get('username')
+        email = request.form.get('email')
+        contraseña = request.form.get('contraseña')
 
-        encontrado = users.query.filter_by(name=usuario).first()
+        encontrado = User.query.filter_by(nombre=usuario).first()
         if encontrado:
-            session['mail'] = usuario.email
+            print('usuario ya existe')
+            flash('usuario ya existe')
+            redirect(url_for('login.log_in'))
         else:
-            new_user(usuario, mail, contraseña)
+            if contraseña != '':
+                print('usuario creado')
+                flash('usuario creado')
+                nu = new_user(usuario, email, contraseña)
+                login_user(nu, remember=True)
 
-    return {'usuario' : usuario,
-            'mail': mail,
-            'contraseña' : contraseña}
-    return {}
+                return redirect(url_for('login.log_in'))
+                '''{'usuario' : usuario,
+                    'mail': email,
+                    'contraseña' : contraseña}'''
+            else:
+                flash('contraseña incompleta')
+                return redirect(url_for('login.log_in'))
+    return render_template('index.html', error='no se encontro usuario', usuario='')
 
 @login.route('/login', methods=['GET', 'POST'])
-def login():
+def log_in():
     if request.method == 'POST':
         email = request.form.get('email')
         contraseña = request.form.get('contraseña')
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
-                return redirect(url_for('views.home'))
+        encontrado = User.query.filter_by(email=email).first()
+        if encontrado:
+            if contraseña == encontrado.contraseña:
+                print('Logged in successfully!')
+                flash('Logged in successfully!')
+                login_user(encontrado, remember=True)
+                return redirect(url_for('login.log_in'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                print('Incorrect password, try again.')
         else:
-            flash('Email does not exist.', category='error')
+            print('Email does not exist.')
 
-    return render_template("login.html", user=current_user)
+            return {user}
+    return render_template('index.html', error='no logueado', usuario='')
