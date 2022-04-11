@@ -1,6 +1,6 @@
 import React from "react";
-import NavbarComp from "./components/NavbarComp";
-import itemComp from "./components/ItemComp";
+import NavbarComp from "./NavbarComp";
+import ItemComp from "./ItemComp";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
