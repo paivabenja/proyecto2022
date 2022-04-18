@@ -1,5 +1,5 @@
-from app import db
-from flask_login import login_user, login_required, logout_user, current_user
+from . import db
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 class User(db.Model):
     _id = db.Column('id', db.Integer, primary_key=True)
@@ -19,5 +19,4 @@ def new_user(nombre, email, contraseña):
     user = User(nombre=nombre, email=email, contraseña=contraseña)
     db.session.add(user)
     db.session.commit()
-    login_user(user, remember=True)
     return user

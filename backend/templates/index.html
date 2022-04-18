@@ -7,7 +7,7 @@
     <title>pruebita</title>
   </head>
   <body>
-    <h1>Usuarios</h1>
+    <h1>{{pagina}}</h1>
     <form action="" method="post">
       <h3>Nombre de usuario</h3>
       <input
@@ -27,6 +27,10 @@
     </form>
 
     <div style="padding: 1rem 3rem 1rem 3rem">
+      {% with messages = get_flashed_messages() %} {% if messages %} {% for msg
+      in messages %}
+      <p style="background-color: #3d3d3d; color: antiquewhite">{{msg}}</p>
+      {% endfor %} {% endif %} {% endwith %}
       <p id="show">{{error}}</p>
       <p id="show2">{{usuario}}</p>
     </div>

@@ -8,13 +8,13 @@ DB_NAME = 'users.db'
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///../{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///../backend/{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.secret_key = 'keloke'
     db.init_app(app)
 
-    from login import login
-    from paginas import paginas
+    from .login import login
+    from .paginas import paginas
 
     app.register_blueprint(login, url_prefix='/')
     app.register_blueprint(paginas, url_prefix='/')
@@ -22,6 +22,7 @@ def create_app():
     create_database(app)
 
     return app
+
 
 
 
