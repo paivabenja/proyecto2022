@@ -1,5 +1,5 @@
 .NavbarComp {
-  position: fixed;
+  position: sticky;
   top: 0px;
   width: 100%;
 }
