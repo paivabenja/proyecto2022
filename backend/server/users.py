@@ -1,8 +1,8 @@
 from . import db
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_login import UserMixin
 
-class User(db.Model):
-    _id = db.Column('id', db.Integer, primary_key=True)
+class User(db.Model, UserMixin):
+    id = db.Column('id', db.Integer, primary_key=True)
     nombre = db.Column(db.String(30))
     email = db.Column(db.String(100))
     contraseña = db.Column(db.String(30))
