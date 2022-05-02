@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <NavbarComp />
       <div className="body">
-        <Item texto="favoritos" />
+        <Item texto="Favoritos" />
         <CardComp
           cardText="lrfjdslkjflsdka"
           cardTitle="lo vengadore"

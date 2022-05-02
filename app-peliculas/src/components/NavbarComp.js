@@ -30,11 +30,12 @@ export default function () {
               <Form className="d-flex">
                 <FormControl
                   type="text"
-                  placeholder="Search"
+                  placeholder="alla la buscan"
                   className="me-2"
                 />
                 <Button variant="outline-success">Search</Button>
               </Form>
+              <Nav.Link href="#tendencia">Perfil</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

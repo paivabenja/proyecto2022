@@ -23,3 +23,12 @@
 .card img {
   filter: brightness(50%);
 }
+
+.card:hover{
+  transition-duration: 1s;
+  transform: scale(105%);
+}
+
+.card:hover img{
+  filter: brightness(70%);
+}
