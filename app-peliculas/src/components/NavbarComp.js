@@ -8,22 +8,31 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import "../styles/NavbarComp.css";
 
-export default function () {
+export default function NavbarComp({
+  nombre,
+  boton1,
+  boton2,
+  boton3,
+  boton4,
+  boton5,
+  boton6,
+}) {
   return (
     <div className="NavbarComp">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Virgenlix</Navbar.Brand>
+          <Navbar.Brand href="#home">{nombre}</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#nuevo">Nuevo</Nav.Link>
-              <Nav.Link href="#tendencia">Tendencia</Nav.Link>
-              <Nav.Link href="#clasicos">Clasicos</Nav.Link>
-              <NavDropdown title="Programas">
-                <NavDropdown.Item href="#series">Series</NavDropdown.Item>
-                <NavDropdown.Item href="#Peliculas">Peliculas</NavDropdown.Item>
+              <Nav.Link href={boton1}>{boton1}</Nav.Link>
+              <Nav.Link href={boton2}>{boton2}</Nav.Link>
+              <Nav.Link href={boton3}>{boton3}</Nav.Link>
+              <NavDropdown title={boton4}>
+                <NavDropdown.Item href={boton5}>{boton5}</NavDropdown.Item>
+                <NavDropdown.Item href={boton6}>{boton6}</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             <Nav>

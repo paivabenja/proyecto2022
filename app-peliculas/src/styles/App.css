@@ -1,7 +1,6 @@
 .App {
   background-color: #363636;
   color: white;
-  height: 100%;
 }
 
 .card-body {
@@ -18,8 +17,15 @@
   background-color: #363636;
   border: none;
   border-radius: 8px;
+  height: 250px;
+  width: 300px;
 }
 
 .card img {
   filter: brightness(50%);
+}
+
+.card:hover img {
+  transition-duration: 500ms;
+  filter: brightness(70%);
 }
