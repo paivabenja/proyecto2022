@@ -18,12 +18,14 @@ export default function NavbarComp({
   boton4,
   boton5,
   boton6,
+  boton7,
+  boton8,
 }) {
   return (
     <div className="NavbarComp">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">{nombre}</Navbar.Brand>
+          <Navbar.Brand href={nombre}>{nombre}</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -44,6 +46,8 @@ export default function NavbarComp({
                 />
                 <Button variant="outline-success">Search</Button>
               </Form>
+              <Nav.Link href={boton7}>{boton7}</Nav.Link>
+              <Nav.Link href={boton8}>{boton8}</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

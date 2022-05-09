@@ -7,7 +7,7 @@
   color: #212529;
 }
 
-.body {
+.home {
   padding: 20px;
 }
 
@@ -26,6 +26,7 @@
 }
 
 .card:hover img {
-  transition-duration: 500ms;
-  filter: brightness(70%);
+  transition-duration: 400ms;
+  transition-delay: 0ms;
+  filter: brightness(30%);
 }
