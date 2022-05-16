@@ -1,20 +1,21 @@
 .App {
-  background-color: #363636;
+  background-color: #080810;
   color: white;
 }
 
 .card-body {
-  color: #212529;
+  color: #080810;
 }
 
 .home {
+  background-color: #080810;
   padding: 20px;
 }
 
 .card {
   display: inline-flex;
   margin: 5px;
-  background-color: #363636;
+  background-color: #080810;
   border: none;
   border-radius: 8px;
   height: 250px;
