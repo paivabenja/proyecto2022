@@ -2,7 +2,7 @@ import json
 import requests
 import traceback
 
-def search(plataformas):
+def search(plataformas=[], generos=[], año=''):
     endpoint = 'https://apis.justwatch.com/graphql'
     data = {
     'operationName': "GetPopularTitles",
@@ -18,12 +18,13 @@ def search(plataformas):
             'excludeGenres': [],
             'excludeIrrelevantTitles': False,
             'excludeProductionCountries': [],
-            'genres': [],
+            'genres': generos,
             'monetizationTypes': [],
             'objectTypes': [],
             'packages': plataformas,
             'presentationTypes': [],
             'productionCountries': [],
+            'releaseYear':{año}
             },
         'popularTitlesSortBy': "POPULAR",
         'sortRandomSeed': 0,
@@ -47,4 +48,41 @@ def search(plataformas):
     except Exception:
         print(traceback.format_exc())
 
+
+def searchByName(name):
+    endpoint = 'https://apis.justwatch.com/graphql'
+    data = {
+    'operationName': "GetSuggestedTitles",
+    'query': "query GetSuggestedTitles($country: Country!, $language: Language!, $first: Int!, $filter: TitleFilter) {\n  popularTitles(country: $country, first: $first, filter: $filter) {\n    edges {\n      node {\n        ...SuggestedTitle\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment SuggestedTitle on MovieOrShow {\n  id\n  objectType\n  objectId\n  content(country: $country, language: $language) {\n    fullPath\n    title\n    originalReleaseYear\n    posterUrl\n    fullPath\n    __typename\n  }\n  __typename\n}\n",
+        'variables': {
+        'country': "AR",
+        'first': 10,
+        'language': "es",
+        'filter': {'searchQuery': name}
+    }
+    }
+
+    try:
+        response = requests.post(endpoint, json=data)
+        if response.status_code == 200:
+            response_json = json.loads(response.text)
+            media = response_json['data']['popularTitles']['edges']
+            for i in media:
+                title = i['node']['content']['title']
+                release_year = i['node']['content']['originalReleaseYear']
+                print(title, release_year)
+            return media
+
+        else:
+            print(response.status_code)
+            return 'error'
+    except Exception:
+        print(traceback.format_exc())
+
+
+
+
+
+
 search(['dnp', 'hbm', 'nfx'])
+searchByName('Spiderman')
