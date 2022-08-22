@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
         return self.watchlist
 
 def new_user(nombre, email, contraseña):
-    user = User(nombre=nombre, email=email, contraseña=contraseña)
+    user = User(nombre=nombre, email=email, contraseña=contraseña, watchlist=[])
     db.session.add(user)
     db.session.commit()
     return user

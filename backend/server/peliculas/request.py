@@ -42,7 +42,7 @@ def search(plataformas=[], generos=[], año=''):
                 title = i['node']['content']['title']
                 platform = i['node']['watchNowOffer']['package']['clearName']
                 print(title, platform)
-
+            return media
         else:
             print(response.status_code)
     except Exception:
@@ -81,8 +81,3 @@ def searchByName(name):
 
 
 
-
-
-
-search(['dnp', 'hbm', 'nfx'])
-searchByName('Spiderman')

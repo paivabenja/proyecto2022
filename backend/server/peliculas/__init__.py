@@ -1,6 +1,5 @@
 from .request import search, searchByName
-from .constants import __author__,  __version__
-from .pelicula import Media
+# from .pelicula import Media
 #https://www.justwatch.com/
 
 from flask_sqlalchemy import SQLAlchemy
@@ -23,3 +22,4 @@ def searchMedia(titulo='', plataforma=[], genero=[], año=[]):
                 release_year = i['node']['content']['originalReleaseYear']
     else:
         data = search(plataforma, genero, año)
+    return data

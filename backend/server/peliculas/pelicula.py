@@ -1,8 +1,5 @@
 
-from .request import Request
-from attr import attrs
-
-
+'''
 class Media:
     __attrs__ = [
         'poster', 'casting', 'director', 'resumen', 'año', 'categoria', 'rating',
@@ -41,6 +38,6 @@ class Media:
             self.is_on_netflix = True
 
         super(Media, self)._populate()
-
+'''
 
     
