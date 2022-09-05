@@ -15,11 +15,13 @@ def searchname(nombre):
     media = jsonify( searchMedia(titulo=nombre))
     return media
 
-@paginas.route('/buscar/<params>')
-def search(params):
-    print(params.split('%20'))
-    [plataforma, genero, año] = params.split('%20')
+@paginas.route('/buscar', methods=['GET', 'POST'])
+def search():
+    plataforma = request.args.get('plt', [])
+    genero = request.args.get('gnr', [])
+    año = request.args.get('yr', {'min': 1900, 'max':2022})
     print(plataforma, genero, año)
+    print(searchMedia(plataforma=plataforma, genero=genero, año=año))
     media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
     return media
 
