@@ -18,21 +18,21 @@ def search(plataformas=[], generos=[], año=''):
             'excludeGenres': [],
             'excludeIrrelevantTitles': False,
             'excludeProductionCountries': [],
-            'genres': generos,
+            'genres': [generos],
             'monetizationTypes': [],
             'objectTypes': [],
-            'packages': plataformas,
+            'packages': [plataformas],
             'presentationTypes': [],
             'productionCountries': [],
-            'releaseYear':{año}
+            'releaseYear':año
             },
         'popularTitlesSortBy': "POPULAR",
         'sortRandomSeed': 0,
         'watchNowFilter': {'packages': plataformas, 'monetizationTypes': []}
     }
     }
-    print(data['variables']['popularTitlesFilter']['packages'])
-
+    print('pakages', data['variables']['popularTitlesFilter']['packages'])
+    print('tipo de data', type(data))
     try:
         response = requests.post(endpoint, json=data)
         if response.status_code == 200:
@@ -45,6 +45,7 @@ def search(plataformas=[], generos=[], año=''):
             return media
         else:
             print(response.status_code)
+            print('\n\n ERROR BRO \n\n')
     except Exception:
         print(traceback.format_exc())
 
@@ -61,6 +62,7 @@ def searchByName(name):
         'filter': {'searchQuery': name}
     }
     }
+
 
     try:
         response = requests.post(endpoint, json=data)
