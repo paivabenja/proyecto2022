@@ -20,8 +20,11 @@ def search():
     plataforma = request.args.get('plt', [])
     genero = request.args.get('gnr', [])
     año = request.args.get('yr', {'min': 1900, 'max':2022})
+    if len(año) <= 4:
+        año = {'min':año, 'max':año}
     print(plataforma, genero, año)
     print(searchMedia(plataforma=plataforma, genero=genero, año=año))
     media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
+    media.headers.add('Access-Control-Allow-Origin', '*')
     return media
 

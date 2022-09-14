@@ -1,11 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function CardComp({
   cardSubTitle,
   cardTitle,
   cardText,
-  cardButton,
   cardImg,
 }) {
   return (

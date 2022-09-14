@@ -18,13 +18,13 @@ def search(plataformas=[], generos=[], año=''):
             'excludeGenres': [],
             'excludeIrrelevantTitles': False,
             'excludeProductionCountries': [],
-            'genres': [generos],
+            'genres': generos,
             'monetizationTypes': [],
             'objectTypes': [],
             'packages': [plataformas],
             'presentationTypes': [],
             'productionCountries': [],
-            'releaseYear':año
+            # 'releaseYear':año
             },
         'popularTitlesSortBy': "POPULAR",
         'sortRandomSeed': 0,
