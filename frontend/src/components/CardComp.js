@@ -1,11 +1,15 @@
 import React from "react";
+<<<<<<< HEAD:frontend/src/components/CardComp.js
+import { Card } from "react-bootstrap";
+=======
 import { Card, Button } from "react-bootstrap";
+import '../styles/CardComp.css';
+>>>>>>> 46e42e0061b06281679d2bb0a3a13a3f7a2b9c28:app-peliculas/src/components/CardComp.js
 
 export default function CardComp({
   cardSubTitle,
   cardTitle,
   cardText,
-  cardButton,
   cardImg,
 }) {
   return (
