@@ -37,12 +37,9 @@ export function NavbarComp() {
                 />
                 <Button variant="outline-success">Search</Button>
               </Form>
-<<<<<<< HEAD:frontend/src/components/NavbarComp.js
               <Nav.Link href='/signup'>Sign in</Nav.Link>
               <Nav.Link href='/login'>Log in</Nav.Link>
-=======
               <Nav.Link href="#tendencia">Perfil</Nav.Link>
->>>>>>> 46e42e0061b06281679d2bb0a3a13a3f7a2b9c28:app-peliculas/src/components/NavbarComp.js
             </Nav>
           </Navbar.Collapse>
         </Container>

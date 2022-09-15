@@ -26,17 +26,17 @@ const Home = () => {
     console.log(res)
 
     for (let i = 0; i < data.length; i++) {
-      array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
+      res[i].node.content.posterUrl = res[i].node.content.posterUrl.replace(
         '.{format}',
         '',
       );
-      array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
+      res[i].node.content.posterUrl = res[i].node.content.posterUrl.replace(
         '{profile}',
         's166',
       );
     }
 
-    console.log(array)
+    console.log(res)
   };
 
   const [data, setData] = useState(createExampleArray());
@@ -45,7 +45,7 @@ const Home = () => {
     fetch('http://localhost:5000/buscar?plt=hbm&gnr=act,cmy')
       .then((res) => res.json())
       .then(setData)
-      .then(formatPosterUrl)
+      .then(console.log)
   };
 
   // will need to change this to add the pictures

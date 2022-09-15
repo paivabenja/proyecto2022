@@ -8,11 +8,12 @@ paginas = Blueprint('paginas', __name__)
 @paginas.route('/')
 def home():
     nombre = current_user.nombre if current_user else ''
-    return f'<h1>Buenos diiiiiias {nombre}</h1>'
+    return f'<h1>Buenos sexo {nombre}</h1>'
 
 @paginas.route('/nombre/<nombre>')
 def searchname(nombre):
     media = jsonify( searchMedia(titulo=nombre))
+    media.headers.add('access-control-allow-origin', '*')
     return media
 
 @paginas.route('/buscar', methods=['GET', 'POST'])
@@ -23,5 +24,6 @@ def search():
     print(plataforma, genero, año)
     print(searchMedia(plataforma=plataforma, genero=genero, año=año))
     media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
+    media.headers.add('access-control-allow-origin', '*')
     return media
 
