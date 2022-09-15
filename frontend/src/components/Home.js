@@ -22,30 +22,42 @@ const Home = () => {
     return exampleArray;
   };
 
-  const formatPosterUrl = (res, setData) => {
-    console.log(res)
+  const formatPosterUrl = () => {
+    if (data[0].node.content.posterUrl == loadingGif) {
+      return;
+    }
+
+    if (data[0].node.content.posterUrl.slice(0, 5) == 'https') {
+      return;
+    }
+
+    let array = data;
 
     for (let i = 0; i < data.length; i++) {
-      res[i].node.content.posterUrl = res[i].node.content.posterUrl.replace(
+      array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
         '.{format}',
         '',
       );
-      res[i].node.content.posterUrl = res[i].node.content.posterUrl.replace(
+      array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
         '{profile}',
         's166',
       );
+      array[i].node.content.posterUrl = posterDomain.concat(
+        array[i].node.content.posterUrl,
+      );
     }
-
-    console.log(res)
+    setData(array);
+    console.log(data);
+    setToggler(!toggler);
   };
 
   const [data, setData] = useState(createExampleArray());
+  const [toggler, setToggler] = useState(true);
 
   const callApi = () => {
     fetch('http://localhost:5000/buscar?plt=hbm&gnr=act,cmy')
       .then((res) => res.json())
-      .then(setData)
-      .then(console.log)
+      .then(setData);
   };
 
   // will need to change this to add the pictures
@@ -53,6 +65,9 @@ const Home = () => {
   // to this: /poster/298192485/{profile}/house-of-the-dragon.{format}
 
   useEffect(callApi, []);
+  useEffect(formatPosterUrl, [data]);
+
+  useEffect(formatPosterUrl, [toggler]);
 
   return (
     <div className="home">
