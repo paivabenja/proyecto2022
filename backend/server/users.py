@@ -16,9 +16,6 @@ class User(db.Model, UserMixin):
     
     def __str__(self):
         return f'{self.id} {self.nombre} {self.mail} {self.contraseña}'
-    
-    def __asdict__(self):
-        return {'id': self.id, 'nombre': self.nombre, 'mail': self.mail, 'contraseña': self.contraseña}
 
     def string_watchlist(self):
         return self.watchlist
