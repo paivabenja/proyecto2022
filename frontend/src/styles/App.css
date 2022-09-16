@@ -1,6 +1,14 @@
+html, body {
+  height: 100vh;
+}
+
 .App {
+  margin-top: 40px;
   background-color: #080810;
   color: white;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .card-body {

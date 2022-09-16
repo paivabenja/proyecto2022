@@ -1,3 +1,9 @@
+.card-img {
+    height: 100%;
+    width: 100%;
+    contain: hidden;
+}
+
 .card-img:hover {
     transition-duration: 500ms;
     transform: scale(105%);
