@@ -1,5 +1,5 @@
 import '../styles/LogIn.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 export function LogIn() {
@@ -7,10 +7,14 @@ export function LogIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
     if (e.target[0].value != '' && e.target[1].value != '') {
-      setUser({ username: e.target[0].value, password: e.target[1].value });
-      alert('usuario: ' + e.target[0].value + '\ncontrasenia: ' + e.target[1].value);
+      setUser({
+        username: e.target[0].value,
+        password: e.target[1].value,
+      });
+      alert(
+        'usuario: ' + e.target[0].value + '\ncontrasenia: ' + e.target[1].value,
+      );
     } else if (e.target[0].value == '' && e.target[1].value == '') {
       alert('llena las dos cosas gordo puto');
     } else if (e.target[0].value == '') {
@@ -19,6 +23,20 @@ export function LogIn() {
       alert('pone contrasenia papi');
     }
   };
+
+  const postData = () => {
+    if (user.username == '') {
+      return;
+    }
+    console.log('posting data, user: ', user.username);
+    fetch('http://localhost:5000', {
+      method: 'POST',
+      headers: { type: 'application/json' },
+      body: user,
+    });
+  };
+
+  useEffect(postData, [user]);
 
   return (
     <div className="login">
