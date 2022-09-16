@@ -9,10 +9,10 @@ login = Blueprint('login', __name__)
 @login.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        usuario = request.form.get('username')
-        email = request.form.get('email')
-        contraseña = request.form.get('contraseña')
-        contraseña2 = request.form.get('contraseña2')
+        usuario = request.json.get('username')
+        email = request.json.get('email')
+        contraseña = request.json.get('contraseña')
+        contraseña2 = request.json.get('contraseña2')
 
         us_existe = User.query.filter_by(nombre=usuario).first()
         email_existe = User.query.filter_by(nombre=email).first()
