@@ -2,7 +2,7 @@ import json
 import requests
 import traceback
 
-def search(plataformas=[], generos=[], año=''):
+def search(plataformas=[], generos=[], año={}):
     endpoint = 'https://apis.justwatch.com/graphql'
     data = {
     'operationName': "GetPopularTitles",
@@ -28,11 +28,11 @@ def search(plataformas=[], generos=[], año=''):
             },
         'popularTitlesSortBy': "POPULAR",
         'sortRandomSeed': 0,
-        'watchNowFilter': {'packages': plataformas, 'monetizationTypes': []}
+        'watchNowFilter': {'packages': [plataformas], 'monetizationTypes': []}
     }
     }
     print('pakages', data['variables']['popularTitlesFilter']['packages'])
-    print('tipo de data', type(data))
+    print(data)
     try:
         response = requests.post(endpoint, json=data)
         if response.status_code == 200:
@@ -80,6 +80,5 @@ def searchByName(name):
             return 'error'
     except Exception:
         print(traceback.format_exc())
-
 
 
