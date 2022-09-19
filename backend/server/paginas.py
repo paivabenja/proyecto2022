@@ -13,6 +13,7 @@ def home():
 @paginas.route('/nombre/<nombre>')
 def searchname(nombre):
     media = jsonify( searchMedia(titulo=nombre))
+    media.headers.add('access-control-allow-origin','*')
     return media
 
 @paginas.route('/buscar', methods=['GET', 'POST'])
@@ -23,5 +24,6 @@ def search():
     print(plataforma, genero, año)
     print(searchMedia(plataforma=plataforma, genero=genero, año=año))
     media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
+    media.headers.add('access-control-allow-origin','*')
     return media
 
