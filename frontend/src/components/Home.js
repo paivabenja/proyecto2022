@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import CardComp from './CardComp';
-import Item from './Item';
+import React, { useEffect, useState } from "react";
+import CardComp from "./CardComp";
+import Item from "./Item";
 
 const Home = () => {
   const loadingGif =
-    'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921';
-  const posterDomain = 'https://images.justwatch.com';
+    "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921";
+  const posterDomain = "https://images.justwatch.com";
 
   const createExampleArray = () => {
     let exampleArray = [];
@@ -13,7 +13,7 @@ const Home = () => {
       exampleArray.push({
         node: {
           content: {
-            title: '',
+            title: "",
             posterUrl: loadingGif,
           },
         },
@@ -27,7 +27,7 @@ const Home = () => {
       return;
     }
 
-    if (data[0].node.content.posterUrl.slice(0, 5) == 'https') {
+    if (data[0].node.content.posterUrl.slice(0, 5) == "https") {
       return;
     }
 
@@ -35,15 +35,15 @@ const Home = () => {
 
     for (let i = 0; i < data.length; i++) {
       array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
-        '.{format}',
-        '',
+        ".{format}",
+        ""
       );
       array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
-        '{profile}',
-        's166',
+        "{profile}",
+        "s166"
       );
       array[i].node.content.posterUrl = posterDomain.concat(
-        array[i].node.content.posterUrl,
+        array[i].node.content.posterUrl
       );
     }
     setData(array);
@@ -55,7 +55,7 @@ const Home = () => {
   const [toggler, setToggler] = useState(true);
 
   const callApi = () => {
-    fetch('http://localhost:5000/buscar?plt=hbm&gnr=act,cmy')
+    fetch("http://localhost:5000/buscar?plt=hbm&gnr=act,cmy")
       .then((res) => res.json())
       .then(setData);
   };
