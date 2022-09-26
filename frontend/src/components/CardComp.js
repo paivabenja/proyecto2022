@@ -1,23 +1,16 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import '../styles/CardComp.css';
+import "../styles/CardComp.css";
 
-export default function CardComp({
-  cardSubTitle,
-  cardTitle,
-  cardText,
-  cardImg,
-}) {
+export default function CardComp({ cardTitle, cardImg, link }) {
   return (
-    <div className="card">
-      <Card className="bg-dark text-white">
+    <a href={link} className="card">
+      <Card className="card bg-dark text-white">
         <Card.Img src={cardImg} alt="Card image" />
         <Card.ImgOverlay>
           <Card.Title>{cardTitle}</Card.Title>
-          <Card.Text>{cardText}</Card.Text>
-          <Card.Text>{cardSubTitle}</Card.Text>
         </Card.ImgOverlay>
       </Card>
-    </div>
+    </a>
   );
 }

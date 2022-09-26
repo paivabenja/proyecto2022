@@ -16,6 +16,9 @@ const Home = () => {
             title: "",
             posterUrl: loadingGif,
           },
+          watchNowOffer: {
+            standardWebUrl: "",
+          },
         },
       });
     }
@@ -27,7 +30,7 @@ const Home = () => {
       return;
     }
 
-    if (data[0].node.content.posterUrl.slice(0, 5) == "https") {
+    if (data[0].node.content.posterUrl.slice(0, 4) == "http") {
       return;
     }
 
@@ -55,19 +58,13 @@ const Home = () => {
   const [toggler, setToggler] = useState(true);
 
   const callApi = () => {
-    fetch("http://localhost:5000/buscar?plt=hbm&gnr=act,cmy")
+    fetch("http://localhost:5000/buscar?plt=nfx&gnr=act,cmy")
       .then((res) => res.json())
       .then(setData);
   };
 
-  // will need to change this to add the pictures
-  // from this: https://images.justwatch.com/poster/298192485/s166/house-of-the-dragon
-  // to this: /poster/298192485/{profile}/house-of-the-dragon.{format}
-
   useEffect(callApi, []);
-  useEffect(formatPosterUrl, [data]);
-
-  useEffect(formatPosterUrl, [toggler]);
+  useEffect(formatPosterUrl, [data, toggler]);
 
   return (
     <div className="home">
@@ -79,10 +76,9 @@ const Home = () => {
               return (
                 <CardComp
                   key={h}
-                  cardText=""
                   cardTitle={data[num].node.content.title}
-                  cardSubTitle=""
                   cardImg={data[num].node.content.posterUrl}
+                  link={data[num].node.watchNowOffer.standardWebURL}
                 ></CardComp>
               );
             })}
