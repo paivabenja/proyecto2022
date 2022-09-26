@@ -1,3 +1,2 @@
-# dependencies
-/server/__pycache__
-/server/peliculas/__pycache__
+# Byte-compiled / optimized / DLL files
+__pycache__/
