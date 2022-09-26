@@ -13,11 +13,16 @@ def home():
 @paginas.route('/nombre/<nombre>')
 def searchname(nombre):
     media = jsonify( searchMedia(titulo=nombre))
+<<<<<<< HEAD
     media.headers.add('access-control-allow-origin','*')
+=======
+    media.headers.add('access-control-allow-origin', '*')
+>>>>>>> backend
     return media
 
 @paginas.route('/buscar', methods=['GET', 'POST'])
 def search():
+<<<<<<< HEAD
     plataforma = request.args.get('plt', [])
     genero = request.args.get('gnr', [])
     año = request.args.get('yr', {'min': 1900, 'max':2022})
@@ -25,5 +30,16 @@ def search():
     print(searchMedia(plataforma=plataforma, genero=genero, año=año))
     media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
     media.headers.add('access-control-allow-origin','*')
+=======
+    plataforma = request.args.get('plt', '')
+    genero = request.args.get('gnr', '')
+    año = request.args.get('yr', {'min': 1900, 'max':2022})
+    if type(año) != dict and len(año)<= 4:
+        año = {'min': año, 'max':año}
+    print(plataforma, genero)
+    print(searchMedia(plataforma=plataforma, genero=genero, año=año))
+    media = jsonify( searchMedia(plataforma=plataforma, genero=genero, año=año))
+    media.headers.add('access-control-allow-origin', '*')
+>>>>>>> backend
     return media
 

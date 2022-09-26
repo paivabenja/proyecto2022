@@ -2,7 +2,11 @@ import json
 import requests
 import traceback
 
+<<<<<<< HEAD
 def search(plataformas=[], generos=[], año=''):
+=======
+def search(plataformas=[], generos=[], año={}):
+>>>>>>> backend
     endpoint = 'https://apis.justwatch.com/graphql'
     data = {
     'operationName': "GetPopularTitles",
@@ -28,20 +32,38 @@ def search(plataformas=[], generos=[], año=''):
             },
         'popularTitlesSortBy': "POPULAR",
         'sortRandomSeed': 0,
+<<<<<<< HEAD
         'watchNowFilter': {'packages': plataformas, 'monetizationTypes': []}
     }
     }
     print('pakages', data['variables']['popularTitlesFilter']['packages'])
     print('tipo de data', type(data))
+=======
+        'watchNowFilter': {'packages': [plataformas], 'monetizationTypes': []}
+    }
+    }
+    print('pakages', data['variables']['popularTitlesFilter']['packages'])
+    print(data)
+>>>>>>> backend
     try:
         response = requests.post(endpoint, json=data)
         if response.status_code == 200:
             response_json = json.loads(response.text)
             media = response_json['data']['popularTitles']['edges']
             for i in media:
+<<<<<<< HEAD
                 title = i['node']['content']['title']
                 platform = i['node']['watchNowOffer']['package']['clearName']
                 print(title, platform)
+=======
+                try:
+                    title = i['node']['content']['title']
+                    platform = i['node']['watchNowOffer']['package']['clearName']
+                    print(title, platform)
+                except:
+                    title = i['node']['content']['title']
+                    print(title, platform)
+>>>>>>> backend
             return media
         else:
             print(response.status_code)
@@ -82,4 +104,7 @@ def searchByName(name):
         print(traceback.format_exc())
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> backend
