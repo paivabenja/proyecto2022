@@ -39,9 +39,13 @@ def search(plataformas=[], generos=[], año={}):
             response_json = json.loads(response.text)
             media = response_json['data']['popularTitles']['edges']
             for i in media:
-                title = i['node']['content']['title']
-                platform = i['node']['watchNowOffer']['package']['clearName']
-                print(title, platform)
+                try:
+                    title = i['node']['content']['title']
+                    platform = i['node']['watchNowOffer']['package']['clearName']
+                    print(title, platform)
+                except:
+                    title = i['node']['content']['title']
+                    print(title, platform)
             return media
         else:
             print(response.status_code)

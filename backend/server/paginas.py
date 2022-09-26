@@ -18,9 +18,9 @@ def searchname(nombre):
 
 @paginas.route('/buscar', methods=['GET', 'POST'])
 def search():
-    plataforma = request.args.get('plt', [])
+    plataforma = request.args.get('plt', '')
     genero = request.args.get('gnr', '')
-    año = request.args.get('yr', '')
+    año = request.args.get('yr', {'min': 1900, 'max':2022})
     if type(año) != dict and len(año)<= 4:
         año = {'min': año, 'max':año}
     print(plataforma, genero)
