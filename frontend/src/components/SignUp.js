@@ -7,6 +7,7 @@ export function SignUp() {
     username: "",
     email: "",
     password: "",
+    password2: "",
   });
 
   const handleSubmit = (e) => {

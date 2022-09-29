@@ -26,11 +26,11 @@ const Home = () => {
   };
 
   const formatPosterUrl = () => {
-    if (data[0].node.content.posterUrl == loadingGif) {
+    if (data[0].node.content.posterUrl === loadingGif) {
       return;
     }
 
-    if (data[0].node.content.posterUrl.slice(0, 4) == "http") {
+    if (data[0].node.content.posterUrl.slice(0, 4) === "http") {
       return;
     }
 

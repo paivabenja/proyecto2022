@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../styles/CardComp.css";
 
 export default function CardComp({ cardTitle, cardImg, link }) {

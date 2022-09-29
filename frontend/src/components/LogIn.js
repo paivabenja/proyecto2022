@@ -24,6 +24,8 @@ export function LogIn() {
     }
   };
 
+  useEffect(() => console.log("first"), [user]);
+
   return (
     <div className="login">
       <Form onSubmit={handleSubmit}>
