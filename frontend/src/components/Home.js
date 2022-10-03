@@ -58,7 +58,7 @@ const Home = () => {
   const [toggler, setToggler] = useState(true);
 
   const callApi = () => {
-    fetch("http://localhost:5000/buscar?plt=nfx&gnr=act,cmy")
+    fetch("http://localhost:5000/buscar")
       .then((res) => res.json())
       .then(setData);
   };
@@ -70,15 +70,19 @@ const Home = () => {
     <div className="home">
       {[0, 1, 2, 3, 4].map((i) => {
         return (
-          <Item key={i} texto="texto">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((h) => {
+          <Item key={i} texto="Peliculas">
+            {[0, 1, 2, 3].map((h) => {
               let num = +(i * 10) + h;
               return (
                 <CardComp
                   key={h}
                   cardTitle={data[num].node.content.title}
                   cardImg={data[num].node.content.posterUrl}
-                  link={data[num].node.watchNowOffer.standardWebURL}
+                  link={
+                    data[num].node.watchNowOffer
+                      ? data[num].node.watchNowOffer.standardWebURL
+                      : "/"
+                  }
                 ></CardComp>
               );
             })}

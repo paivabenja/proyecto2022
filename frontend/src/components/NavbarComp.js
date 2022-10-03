@@ -16,7 +16,7 @@ export function NavbarComp() {
     <div className="NavbarComp">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Mapet</Navbar.Brand>
+          <Navbar.Brand href="/">PelisPlu?</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -36,7 +36,7 @@ export function NavbarComp() {
               <Form className="d-flex">
                 <FormControl
                   type="text"
-                  placeholder="alla la buscan"
+                  placeholder="Buscar"
                   className="me-2"
                 />
                 <Button variant="outline-success">Search</Button>
