@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from 'react';
+import { context } from '../context/context';
 //import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -8,10 +9,11 @@ import {
   Form,
   FormControl,
   Button,
-} from "react-bootstrap";
-import "../styles/NavbarComp.css";
+} from 'react-bootstrap';
+import '../styles/NavbarComp.css';
 
 export function NavbarComp() {
+  const { setGenre } = useContext(context);
   return (
     <div className="NavbarComp">
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -24,11 +26,14 @@ export function NavbarComp() {
               <Nav.Link href="/movies">Movies</Nav.Link>
               <Nav.Link href="/series">Series</Nav.Link>
               <NavDropdown title="Categories">
-                <NavDropdown.Item href="/categories/action">
+                <NavDropdown.Item onClick={() => setGenre('action')}>
                   Action
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/categories/drama">
                   Drama
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/categories/drama">
+                  Comedy
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>

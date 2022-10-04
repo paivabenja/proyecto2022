@@ -4,6 +4,7 @@ from .users import User, new_user
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 login = Blueprint('login', __name__)
+
 @login.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
