@@ -18,12 +18,12 @@ export function SignUp() {
       return;
     }
 
-    if (e.target[1].value) {
+    if (e.target[1].value == "") {
       alert("Insert a email you dumb fuck");
       return;
     }
 
-    if (e.target[2].value) {
+    if (e.target[2].value == "") {
       alert("Insert a password you dumb fuck");
       return;
     }
@@ -36,10 +36,10 @@ export function SignUp() {
     setUser({
       username: e.target[0].value,
       email: e.target[1].value,
-      passsword: e.target[2].value,
+      password: e.target[2].value,
     });
     alert(
-      "usuario: " + e.target[0].value + "\ncontrasenia: " + e.target[1].value
+      "usuario: " + e.target[0].value + "\ncontrasenia: " + e.target[2].value
     );
   };
 
@@ -49,10 +49,10 @@ export function SignUp() {
     }
 
     console.log("posting data, user: ", user.username);
-    fetch("http://localhost:5000", {
+    fetch("http://localhost:5000/signup", {
       method: "POST",
-      headers: { type: "application/json" },
-      body: user,
+      headers: { "content-type": "application/json", "access-control-allow-origin": "*"},
+      body: JSON.stringify(user),
     });
   };
 

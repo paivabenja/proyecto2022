@@ -28,51 +28,48 @@ def signup():
         us_existe = User.query.filter_by(nombre=username).first()
         email_existe = User.query.filter_by(nombre=email).first()
 
-        if us_existe or email_existe:
+        if us_existe:
             print('username already exists')
+            print(User.query.filter_by(nombre=username).first()) 
             return jsonify({'error': 'username already exists'}), 409
         elif email_existe:
             print('email already used')
             return jsonify({'error': 'email already used'}), 409
         elif password == '':
-                return('password incomplete')
-        elif len(password) < 6:
-            print('password too short')
-            return('password too short')
-        elif len(username) < 3:
-            return('username too short')
+                return(jsonify({'error':'password incomplete'}))
         else:
-            nu = new_user(username, email, generate_password_hash(password, method='sha256'))
-            print('username creado')
+            contraseña = generate_password_hash(password, method='sha256')
+            nu = new_user(username, email, contraseña)
+            print('usuario creado')
             login_user(nu, remember=True)
-            response = jsonify({'username': nu.__asdict__()})
+            response = jsonify({'user': nu.__asdict__()})
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 
 
-@login.route('/login', methods=['GET', 'POST'])
+@login.route('/login', methods=['GET'])
 def log_in():
-    if request.method == 'POST':
-        email = request.json['email']
-        password = request.json['password']
+    if request.method == 'GET':
+        username = request.args.get('username')
+        password = request.args.get('password')
 
-        username = User.query.filter_by(email=email).first()
-        
-        if username:
-            if check_password_hash(username.password, password):
+        user = User.query.filter_by(nombre=username).first()
+        print(username, password, user)
+        if user:
+            if check_password_hash(user.contraseña, password):
                 print('Logged in successfully!')
-                login_user(username, remember=True)
-                response = jsonify({'username': username.__asdict__()})
+                login_user(user, remember=True)
+                response = jsonify({'user': user.__asdict__()})
                 response.headers.add('Access-Control-Allow-Origin', '*')
                 return response
             else:
-                print('password incorrecta')
+                print('incorrect password')
                 return jsonify({'error': 'incorrect password'}), 401
         else:
-            print('username no existe')
-            return jsonify({'error': 'username does not exist'}), 401
+            print('usuario no existe')
+            return jsonify({'error': 'user does not exist'}), 404
 
-    return jsonify({'username': 'not logged'})
+    return jsonify({'user': 'not logged'})
 
 @login_required
 @login.route('/logout')

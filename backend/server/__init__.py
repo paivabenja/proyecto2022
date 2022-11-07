@@ -16,13 +16,13 @@ def create_app():
     jwt = JWTManager(app)
     db.init_app(app)
 
-    from .login import login
+    from .users.login import login
     from .paginas import paginas
 
     app.register_blueprint(login, url_prefix='/')
     app.register_blueprint(paginas, url_prefix='/')
 
-    from .users import User
+    from .users.users import User
     
     login_manager = LoginManager()
     login_manager.login_view = 'login.log_in'

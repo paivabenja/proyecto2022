@@ -24,7 +24,22 @@ export function LogIn() {
     }
   };
 
-  useEffect(() => console.log("first"), [user]);
+  // useEffect(() => console.log("first"), [user]);
+
+    const postData = () => {
+    if (user.username === "") {
+      return;
+    }
+
+    console.log("posting data, user: ", user.username);
+    fetch(`http://localhost:5000/login?username=${user.username}&password=${user.password}`)
+      .then(resp => {
+        if(resp.ok){
+          window.location.href="/"
+        };});
+  };
+
+  useEffect(postData, [user]);
 
   return (
     <div className="login">
