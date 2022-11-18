@@ -30,13 +30,13 @@ def signup():
 
         if us_existe:
             print('username already exists')
-            print(User.query.filter_by(nombre=username).first()) 
+            print(User.query.filter_by(nombre=username).first())
             return jsonify({'error': 'username already exists'}), 409
         elif email_existe:
             print('email already used')
             return jsonify({'error': 'email already used'}), 409
         elif password == '':
-                return(jsonify({'error':'password incomplete'}))
+            return (jsonify({'error': 'password incomplete'}))
         else:
             contraseña = generate_password_hash(password, method='sha256')
             nu = new_user(username, email, contraseña)
@@ -70,6 +70,7 @@ def log_in():
             return jsonify({'error': 'user does not exist'}), 404
 
     return jsonify({'user': 'not logged'})
+
 
 @login_required
 @login.route('/logout')

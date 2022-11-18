@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { context } from '../context/context';
-import CardComp from './CardComp';
-import Item from './Item';
+import React, { useContext, useEffect, useState } from "react";
+import { context } from "../context/context";
+import CardComp from "./CardComp";
+import Item from "./Item";
 
 const Home = ({ section }) => {
   const createExampleArray = () => {
@@ -10,11 +10,11 @@ const Home = ({ section }) => {
       exampleArray.push({
         node: {
           content: {
-            title: '',
+            title: "",
             posterUrl: loadingGif,
           },
           watchNowOffer: {
-            standardWebUrl: '',
+            standardWebUrl: "",
           },
         },
       });
@@ -23,22 +23,14 @@ const Home = ({ section }) => {
   };
 
   const loadingGif =
-    'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921';
-  const posterDomain = 'https://images.justwatch.com';
+    "https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921";
+  const posterDomain = "https://images.justwatch.com";
 
-  const { searchUrl, setSearchUrl, genre } = useContext(context);
+  const [prevRoute, setPrevRoute] = useState("/");
+  const { searchUrl, setSearchUrl, route } = useContext(context);
   const [data, setData] = useState(createExampleArray());
   const [toggler, setToggler] = useState(true);
-
-  const checkURL = () => {
-    if (section === 'home') {
-      return;
-    } else if (section === 'action') {
-      setSearchUrl(...searchUrl, '?gnr=act');
-    } else if (section === 'comedy') {
-      setSearchUrl(...searchUrl, '?gnr=cmy');
-    }
-  };
+  const [title, setTitle] = useState("");
 
   const callApi = () => {
     fetch(searchUrl)
@@ -46,12 +38,26 @@ const Home = ({ section }) => {
       .then(setData);
   };
 
+  const filterData = () => {
+    if (prevRoute === route) {
+      return;
+    }
+    setPrevRoute(route);
+    if (route === "/series") {
+      setData(data.filter((i) => i.node.content.__typename === "ShowContent"));
+    }
+
+    if (route === "/movies") {
+      setData(data.filter((i) => i.node.content.__typename === "MovieContent"));
+    }
+  };
+
   const formatPosterUrl = () => {
     if (data[0].node.content.posterUrl === loadingGif) {
       return;
     }
 
-    if (data[0].node.content.posterUrl.slice(0, 4) === 'http') {
+    if (data[0].node.content.posterUrl.slice(0, 4) === "http") {
       return;
     }
 
@@ -59,46 +65,86 @@ const Home = ({ section }) => {
 
     for (let i = 0; i < data.length; i++) {
       array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
-        '.{format}',
-        '',
+        ".{format}",
+        ""
       );
       array[i].node.content.posterUrl = array[i].node.content.posterUrl.replace(
-        '{profile}',
-        's166',
+        "{profile}",
+        "s166"
       );
       array[i].node.content.posterUrl = posterDomain.concat(
-        array[i].node.content.posterUrl,
+        array[i].node.content.posterUrl
       );
     }
     setData(array);
-    console.log(data);
     setToggler(!toggler);
+    console.log(data[3]);
   };
-  useEffect(callApi, []);
-  useEffect(checkURL, [genre]);
-  useEffect(formatPosterUrl, [data, toggler]);
+
+  const changeContentByGenre = () => {
+    console.log(route);
+    if (route === "/") {
+      setSearchUrl("http://localhost:5000/buscar");
+    }
+    if (route === "/action") {
+      setSearchUrl("http://localhost:5000/buscar?gnr=act");
+    }
+    if (route === "/drama") {
+      setSearchUrl("http://localhost:5000/buscar?gnr=drm");
+    }
+    if (route === "/comedy") {
+      setSearchUrl("http://localhost:5000/buscar?gnr=cdy");
+    }
+    if (route === "/movies") {
+      setSearchUrl("http://localhost:5000/buscar");
+    }
+    if (route === "/series") {
+      setSearchUrl("http://localhost:5000/buscar");
+    }
+  };
+
+  const updateTitle = () => {
+    if (route === "/") {
+      setTitle("Home");
+    }
+    if (route === "/movies") {
+      setTitle("Movies");
+    }
+    if (route === "/series") {
+      setTitle("Series");
+    }
+    if (route === "/action") {
+      setTitle("Action");
+    }
+    if (route === "/drama") {
+      setTitle("Drama");
+    }
+    if (route === "/comedy") {
+      setTitle("Comedy");
+    }
+  };
+
+  useEffect(callApi, [searchUrl]);
+  useEffect(formatPosterUrl, [data]);
+  useEffect(filterData, [data]);
+  useEffect(changeContentByGenre, [route]);
+  useEffect(updateTitle, [route]);
 
   return (
     <div className="home">
-      {[0, 1, 2, 3, 4].map((i) => {
+      <Item>{title}</Item>
+      {data.map((d, i) => {
         return (
-          <Item key={i} texto="Peliculas">
-            {[0, 1, 2, 3].map((h) => {
-              let num = +(i * 10) + h;
-              return (
-                <CardComp
-                  key={h}
-                  cardTitle={data[num].node.content.title}
-                  cardImg={data[num].node.content.posterUrl}
-                  link={
-                    data[num].node.watchNowOffer
-                      ? data[num].node.watchNowOffer.standardWebUrl
-                      : '/'
-                  }
-                ></CardComp>
-              );
-            })}
-          </Item>
+          <CardComp
+            key={i}
+            cardTitle={data[i].node.content.title}
+            cardImg={data[i].node.content.posterUrl}
+            link={
+              data[i].node.watchNowOffer
+                ? data[i].node.watchNowOffer.standardWebURL
+                : "/"
+            }
+          ></CardComp>
         );
       })}
     </div>

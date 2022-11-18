@@ -1,10 +1,5 @@
 import React from "react";
 
-export default function Item({ texto = "la concha de tu madre", children }) {
-  return (
-    <>
-      <h1 style={{ padding: "10px" }}>{texto}</h1>
-      {children}
-    </>
-  );
+export default function Item({ children }) {
+  return <h1 style={{ padding: "10px" }}>{children}</h1>;
 }

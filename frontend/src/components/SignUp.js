@@ -7,7 +7,6 @@ export function SignUp() {
     username: "",
     email: "",
     password: "",
-    password2: "",
   });
 
   const handleSubmit = (e) => {
@@ -18,12 +17,12 @@ export function SignUp() {
       return;
     }
 
-    if (e.target[1].value == "") {
+    if (e.target[1].value === "") {
       alert("Insert a email you dumb fuck");
       return;
     }
 
-    if (e.target[2].value == "") {
+    if (e.target[2].value === "") {
       alert("Insert a password you dumb fuck");
       return;
     }
@@ -38,9 +37,6 @@ export function SignUp() {
       email: e.target[1].value,
       password: e.target[2].value,
     });
-    alert(
-      "usuario: " + e.target[0].value + "\ncontrasenia: " + e.target[2].value
-    );
   };
 
   const postData = () => {
@@ -49,11 +45,18 @@ export function SignUp() {
     }
 
     console.log("posting data, user: ", user.username);
+    console.table(user);
+
     fetch("http://localhost:5000/signup", {
       method: "POST",
-      headers: { "content-type": "application/json", "access-control-allow-origin": "*"},
+      headers: {
+        "content-type": "application/json",
+        "access-control-allow-origin": "*",
+      },
       body: JSON.stringify(user),
-    });
+    })
+      .then(console.log)
+      .catch(console.log);
   };
 
   useEffect(postData, [user]);
@@ -61,18 +64,18 @@ export function SignUp() {
   return (
     <div className="login">
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="Username">
+        <Form.Group className="mb-3">
           <Form.Label>Enter a username</Form.Label>
           <Form.Control placeholder="Enter Username" />
           <Form.Label>Enter your Email</Form.Label>
           <Form.Control type="mail" placeholder="Email" />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Repeat your password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
